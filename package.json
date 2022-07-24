@@ -1,0 +1,18 @@
+{
+  "name": "instagramnetworkgraph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "m123-dev",
+  "license": "ISC",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "d3": "^7.6.1",
+    "express": "^4.18.1",
+    "jsdom": "^20.0.0",
+    "puppeteer": "^15.4.0"
+  }
+}
