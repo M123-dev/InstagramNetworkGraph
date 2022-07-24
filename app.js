@@ -5,10 +5,8 @@ const scrape_all_users = require('./lib/scrape_all_users.js');
 
 // TODO: Implement followed by support
 // TODO: Realtime chart
-// TODO: Chart
 // TODO: Handle privat accounts
 // TODO: Handle profile picture
-// TODO: Handle size
 
 (async () => {
 

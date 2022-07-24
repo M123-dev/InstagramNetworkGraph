@@ -12,6 +12,9 @@ var simulation = d3
   .force("charge", d3.forceManyBody())
   .force("center", d3.forceCenter(width / 2, height / 2))
   .force("attraceForce", d3.forceManyBody().strength(-100))
+  .force('collision', d3.forceCollide().radius(function(d) {
+    return d.size;
+  }))
   .force(
     "link",
     d3
@@ -48,14 +51,13 @@ d3.json("data.json", function (error, graph) {
     .data(graph.nodes)
     .enter()
     .append("circle")
-    .attr("r", 20)
+    .attr("r", function (d) {
+      return d.size;
+    })
     .attr("fill", "#fff")
     .style("stroke-width", 2)
     .style("stroke", function (d) {
       return color(d.color);
-    })
-    .attr("group", function (d) {
-      return d.group;
     })
     .call(
       d3
