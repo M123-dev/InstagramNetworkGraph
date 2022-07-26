@@ -1,8 +1,8 @@
-let svg = d3.select("svg"),
+(async () => {
+  let svg = d3.select("svg"),
   width = +svg.node().getBoundingClientRect().width,
   height = +svg.node().getBoundingClientRect().height;
 
-//add encompassing group for the zoom
 var g = svg.append("g");
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
@@ -39,7 +39,13 @@ d3.json("data.json", function (error, graph) {
     .style("stroke-width", function (d) {
       return d.value;
     })
-    .style("stroke", "#999")
+    .style("stroke", function (d) {
+      if( d.source === "pinkqueen252"){
+        return "#f54242";
+      } else {
+        return "#999";
+      }
+    })
     .style("opacity", "1")
     .attr("group", function (d) {
       return d.group;
@@ -66,7 +72,19 @@ d3.json("data.json", function (error, graph) {
         .on("drag", dragged)
         .on("end", dragended)
     )
-    .on("click", function (d) {});
+    .on("click", function (d) {})
+    .on("mouseenter", (evt, d) => {
+      link
+        .attr("display", "none")
+        .filter(l => 
+          {
+            return l.source.index === d || l.target.index === d;
+          })
+        .attr("display", "block");
+    })
+    .on("mouseleave", evt => {
+      link.attr("display", "block");
+    });
 
   // Adding the label for each node
   var text = g
@@ -167,3 +185,6 @@ svg
   .call(zoom_handler.transform, d3.zoomIdentity.scale(1, 1));
 
 zoom_handler(svg);
+
+})();
+
