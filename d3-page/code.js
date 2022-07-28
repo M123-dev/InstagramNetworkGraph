@@ -30,6 +30,13 @@
         })
     );
 
+  let response = await fetch("root.json"); 
+  let json = await response.json(); 
+  let root_username = json["username"];
+
+
+  console.log(root_username);
+
   d3.json("data.json", function (error, graph) {
     if (error) throw error;
 
@@ -42,7 +49,7 @@
         return d.value;
       })
       .style("stroke", function (d) {
-        if (d.source === "marvin.moeltgen") {
+        if (d.source === root_username) {
           return "#f54242";
         } else {
           return "#999";

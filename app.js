@@ -8,6 +8,7 @@ const { graph_host } = require('./d3-page/graph-host.js');
 // TODO: Implement followed by support
 // TODO: Handle profile picture
 // TODO: Setting for showing people with a certain amount of mutual friends but no direct link to root
+// TODO: Allow to show non direct mutual friends
 
 (async () => {
 

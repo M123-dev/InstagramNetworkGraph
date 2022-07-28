@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Instagram Network Graph config</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="config.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Instagram Network Graph config</h2>
+      </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Config</h4>
+          <iframe name="dummyframe" id="dummyframe" style="display: none"></iframe>
+          <form class="needs-validation" novalidate method="post" target="dummyframe">
+            <p>You can use a different account for scraping then your main account and if you wan't automatically remove all private accounts to re-scrape them with your main account. (Using a alt account doesn't work together with "mutual followed by")</p>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="email">Username/Email</label>
+                <input name="email" type="text" class="form-control" id="email" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="username">Username to scrape</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="requests_per_hour">Requests per hour</label>
+              <input name="requests_per_hour" type="number" class="form-control" id="requests_per_hour" value="200" required>
+              <p> 200 is a save guess as it's the limit for the official analytics api
+                the inofficial api has likely a higher limit as instagram won't block normal users so easily
+                feel free to go higher then that. Especially for users with >300 following this shouldn't be a problem
+                It can be set as low as wanted, a minimal limit of 2000ms after every request is enforced automatically</p>
+            </div>
+
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="use_edge_mutual_followed_by" name="use_edge_mutual_followed_by">
+              <label class="custom-control-label" for="use_edge_mutual_followed_by">Not recommended: Use edge mutual followed by</label>
+              <a href="#" data-toggle="tooltip" title="Uses the small info below the profile to get the mutual friends, it is way less accurate, doesn't work when scraping with a alt accounts (as they don't follow the same people) but needs only half of the queries. Not recommended as it only shows the first 3 mutual connections, not all of them">Hover for more info</a>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="headless" name="headless">
+              <label class="custom-control-label" for="headless">Run headless</label>
+              <a href="#" data-toggle="tooltip" title="The browser instance should be invisible">Hover for more info</a>
+            </div>
+            <div class="col-md-8 order-md-1">
+
+            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/scrape_root_user';">1. Scrape root user (yourself)</button>
+
+            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/scrape_all_users';">2. Scrape all your connections</button>
+
+            <button onclick="javascript: form.action='/remove_private_accounts';" data-toggle="tooltip" title="This removes all private accounts to allow to re-scrape them with your main account. Alert when removed without rerunning the graph will break!" class="btn btn-secondary btn-lg btn-block m-1" type="submit">3. Remove private accounts (optional, hover for disclaimer)</button>
+
+            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/generate_data_set';">4. Generate data set</button>
+
+            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/graph'; form.target='';">5. Show graph</button>
+          </div>
+
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2022 Marvin Möltgen</p>
+      </footer>
+    </div>
+  </body>
+</html>
