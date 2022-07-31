@@ -11,7 +11,7 @@
     .forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("attraceForce", d3.forceManyBody().strength(-100))
+    .force("attraceForce", d3.forceManyBody().strength(-400))
     .force(
       "collision",
       d3.forceCollide().radius(function (d) {
