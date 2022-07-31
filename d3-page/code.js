@@ -85,7 +85,7 @@
 
   var g = svg.append("g");
 
-  var color = d3.scaleOrdinal(d3.schemeCategory20);
+  var color = d3.scaleSequential(d3.interpolateSinebow);
 
   if (config_obj === undefined) {
     config_obj = await (await fetch("config.json")).json();
@@ -168,9 +168,6 @@
     })
     .attr("fill", "#fff")
     .style("stroke-width", 2)
-    .style("stroke", function (d) {
-      return color(d.color);
-    })
     .on("mouseenter", (evt, d) => {
       let list = [];
       link
@@ -248,6 +245,12 @@
     node.attr("transform", (d) => {
       return "translate(" + d.x + "," + d.y + ")";
     });
+
+    circle.style("stroke", function (d) {
+      var value = d.x / 2000 - d.y / 2000;
+      console.log(color(value));
+      return color(value);
+    })
   }
 
   // Used to drag the graph round the screen
