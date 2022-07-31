@@ -12,7 +12,7 @@
 
   if (mock_version) {
     console.log("Generating mock data");
-    config_obj = { "username": "Root", "attraceForce": -400 };
+    config_obj = { "username": "Root", "attraceForce": -400 , "link_strength": 0.5};
 
     let obj = {
       nodes: [],
@@ -92,6 +92,7 @@
   }
   let root_username = config_obj["username"];
   let attraceForce = config_obj["attraceForce"];
+  let link_strength = config_obj["link_strength"];
 
   var simulation = d3
     .forceSimulation()
@@ -113,7 +114,7 @@
         })
         .distance(function (d) {
           return d.length;
-        })
+        }).strength(link_strength)
     );
 
   console.log(root_username);
