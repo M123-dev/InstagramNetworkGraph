@@ -51,7 +51,7 @@
     for (let i = 0; i < alphabet.length; i++) {
       obj.nodes.push({
         id: alphabet[i],
-        size: Math.floor(Math.random() * 100),
+        size: Math.floor(Math.random() * 100) + 1,
       });
     }
 
