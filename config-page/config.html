@@ -51,17 +51,55 @@
                 It can be set as low as wanted, a minimal limit of 2000ms after every request is enforced automatically</p>
             </div>
 
+            <!--- Link size --->
+
             <div class="col-md-6 mb-3">
-              <label for="link_size_multi">Link size multiplier</label>
-              <input name="link_size_multi" type="number" class="form-control" id="link_size_multi" value="200" required>
-              <p> Multiplier for the link size, is done in the generation step not dynamically in the graph for performance.</p>
+              <label for="min_link_size">Minimal link size</label>
+              <input name="min_link_size" type="number" class="form-control" id="min_link_size" value="10" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="normal_link_size">Normal link size</label>
+              <input name="normal_link_size" type="number" class="form-control" id="normal_link_size" value="300" required>
+              <p> For links which have no connections with the user to scrape</p>
             </div>
 
             <div class="col-md-6 mb-3">
               <label for="max_link_size">Maximal link size</label>
               <input name="max_link_size" type="number" class="form-control" id="max_link_size" value="4000" required>
-              <p> The maximal link size</p>
             </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="link_size_multi">Link size multiplier</label>
+              <input name="link_size_multi" type="number" class="form-control" id="link_size_multi" value="400" required>
+              <p> Multiplier for the link size, is done in the generation step not dynamically in the graph for performance.</p>
+            </div>
+
+            <!--- Node size --->
+
+            <div class="col-md-6 mb-3">
+              <label for="min_node">Minimal node size</label>
+              <input name="min_node" type="number" class="form-control" id="min_node" value="10" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="max_node">Maximal node size</label>
+              <input name="max_node" type="number" class="form-control" id="max_node" value="100" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="multiply_node">Node size multiplier</label>
+              <input name="multiply_node" type="number" class="form-control" id="multiply_node" value="200" required>
+              <p> Multiplier for the node size.</p>
+            </div>
+
+            <!-- Misc -->
+
+            <div class="col-md-6 mb-3">
+              <label for="attraceForce"> AttraceForce </label>
+              <input name="attraceForce" type="number" class="form-control" id="attraceForce" value="-400" required>
+            </div>
+
 
 
             <div class="custom-control custom-checkbox">

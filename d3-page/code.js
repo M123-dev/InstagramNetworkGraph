@@ -7,11 +7,16 @@
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
 
+  let response = await fetch("config.json"); 
+  let json = await response.json(); 
+  let root_username = json["username"];
+  let attraceForce = json["attraceForce"];
+
   var simulation = d3
     .forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("attraceForce", d3.forceManyBody().strength(-400))
+    .force("attraceForce", d3.forceManyBody().strength(attraceForce))
     .force(
       "collision",
       d3.forceCollide().radius(function (d) {
@@ -30,9 +35,7 @@
         })
     );
 
-  let response = await fetch("root.json"); 
-  let json = await response.json(); 
-  let root_username = json["username"];
+
 
 
   console.log(root_username);

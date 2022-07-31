@@ -134,4 +134,4 @@ data/*
 sessions/*
 .env
 d3-page/data.json
-d3-page/root.json
+d3-page/config.json
