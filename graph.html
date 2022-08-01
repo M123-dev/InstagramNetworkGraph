@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2"  />
+    <title>Instagram network graph</title>
+
+<style>
+/* HTML styles */
+html{ width: 100%; height: 100%; }
+body{ 
+  width: 100%; 
+  height: 100%;
+  margin: 0; padding: 0; 
+  display: flex; 
+  font-family: sans-serif; font-size: 75%; }
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+
+/* SVG styles */
+svg {
+  flex-basis: 100%;
+  min-width: 200px;
+  height: 100%;
+}
+.links line {
+  stroke: #aaa;
+}
+.nodes circle {
+  pointer-events: all;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+<svg></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
+<script>
+
+const yellow = d3.interpolateYlGn(0); // "rgb(255, 255, 229)"
+const yellowGreen = d3.interpolateYlGn(0.5); // "rgb(120, 197, 120)"
+const green = d3.interpolateYlGn(1); // "rgb(0, 69, 41)"
+
+</script>
+<script src="code.js"></script>
+</body>
+</html>
