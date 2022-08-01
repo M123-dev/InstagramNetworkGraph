@@ -7,6 +7,7 @@
   let config_obj;
 
   let graph;
+  let hover = false;
 
   if (mock_version) {
     console.log("Generating mock data");
@@ -181,6 +182,7 @@
       return "#1f77b4";
     })
     .on("mouseenter", (evt, d) => {
+      hover = true;
       let list = [];
       link
         //.attr("display", "none")
@@ -203,9 +205,26 @@
           return n.index === d || list.includes(n.id);
         })
         .style("opacity", "1");
+
+      if (colorful) {
+        circle
+          .filter((n) => {
+            console.log(n);
+            return n.index !== d && !list.includes(n.id);
+          })
+          .style("stroke", function (d) {
+            return "#a8bfe3";
+          });
+      }
     })
     .on("mouseleave", (evt) => {
-      //link.attr("display", "block");
+      hover = false;
+      if (colorful) {
+        circle.style("stroke", function (d) {
+          var value = d.x / 2000 - d.y / 2000;
+          return color(value);
+        });
+      }
       link.style("opacity", "1");
       node.style("opacity", "1");
     });
@@ -270,7 +289,7 @@
         return color(((d.x / 2000) + (d.y / 2000) )/4);
       }
     */
-    if (colorful) {
+    if (colorful && !hover) {
       circle.style("stroke", function (d) {
         var value = d.x / 2000 - d.y / 2000;
         return color(value);
