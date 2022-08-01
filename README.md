@@ -1,8 +1,11 @@
 # Instagram Network Graph
 
-An all in one instagram scraper and analyzer for finding and visualizing clusters from people you are following.
+An all in one Instagram scraper and analyzer for finding and visualizing clusters from people you are following.
 
 # Example
+
+* [Interactive example with mock data](https://m123-dev.github.io/instagramNetworkGraph/graph.html?mock_version=true)
+
 ![Example cluster](/assets/Cluster_dark.png?raw=true "Optional Title")
 
 - [Other example assets](/assets/)
