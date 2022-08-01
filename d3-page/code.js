@@ -1,5 +1,4 @@
 (async () => {
-
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
@@ -7,12 +6,17 @@
   const mock_version = params.mock_version === "true";
   let config_obj;
 
-  
   let graph;
 
   if (mock_version) {
     console.log("Generating mock data");
-    config_obj = { "username": "Root", "attraceForce": -400 , "link_strength": 0.5};
+    config_obj = {
+      username: "Root",
+      attraceForce: -400,
+      link_strength: 0.5,
+      colorful: true,
+      max_size: 100,
+    };
 
     let obj = {
       nodes: [],
@@ -55,25 +59,24 @@
       });
     }
 
-      obj.nodes.push({
-        id: "Root",
-        size: 100,
-      });
+    obj.nodes.push({
+      id: "Root",
+      size: 100,
+    });
 
-      for (let i = 0; i < alphabet.length; i++) {
-        let random = Math.floor(Math.random() * (alphabet.length - 1)) / 3;
+    for (let i = 0; i < alphabet.length; i++) {
+      let random = Math.floor(Math.random() * (alphabet.length - 1)) / 3;
+      obj.links.push({
+        target: alphabet[i],
+        source: "Root",
+        length: Math.floor(Math.random() * 10) + 600,
+      });
+      for (let j = 0; j < random; j++) {
         obj.links.push({
-          target: alphabet[i],
-          source: "Root",
+          source: alphabet[i],
+          target: alphabet[j],
           length: Math.floor(Math.random() * 10) + 600,
         });
-        for (let j = 0; j < random; j++) {
-          obj.links.push({
-            source: alphabet[i],
-            target: alphabet[j],
-            length: Math.floor(Math.random() * 10) + 600,
-          });
-        
       }
     }
     graph = obj;
@@ -93,6 +96,8 @@
   let root_username = config_obj["username"];
   let attraceForce = config_obj["attraceForce"];
   let link_strength = config_obj["link_strength"];
+  let colorful = config_obj["colorful"] === true;
+  let max_size = config_obj["max_node"];
 
   var simulation = d3
     .forceSimulation()
@@ -114,7 +119,8 @@
         })
         .distance(function (d) {
           return d.length;
-        }).strength(link_strength)
+        })
+        .strength(link_strength)
     );
 
   console.log(root_username);
@@ -123,7 +129,7 @@
     console.log("Loading json...");
     const d3_response = await fetch("data.json");
     graph = await d3_response.json();
-  
+
     console.log("Loaded data.json");
   }
 
@@ -167,7 +173,13 @@
       return d.size;
     })
     .attr("fill", "#fff")
-    .style("stroke-width", 2)
+    .style("stroke-width", function (d) {
+      console.log(max_size);
+      return d.size / (max_size / 8) + 2;
+    })
+    .style("stroke", function (d) {
+      return "#1f77b4";
+    })
     .on("mouseenter", (evt, d) => {
       let list = [];
       link
@@ -246,11 +258,24 @@
       return "translate(" + d.x + "," + d.y + ")";
     });
 
+    /* Creating a color circle around the root user
     circle.style("stroke", function (d) {
-      var value = d.x / 2000 - d.y / 2000;
-      console.log(color(value));
-      return color(value);
-    })
+      if(d.x > root_dx && d.y > root_dy){
+        return color(- (d.x / 2000) + (d.y / 2000) );
+      } else if(d.x < root_dx && d.y > root_dy){
+        return color( (-(d.x / 2000) - (d.y / 2000))/2 );
+      } else if(d.x < root_dx && d.y < root_dy){
+        return color((- (d.x / 2000) + (d.y / 2000))/3 );
+      } else if(d.x > root_dx && d.y < root_dy){
+        return color(((d.x / 2000) + (d.y / 2000) )/4);
+      }
+    */
+    if (colorful) {
+      circle.style("stroke", function (d) {
+        var value = d.x / 2000 - d.y / 2000;
+        return color(value);
+      });
+    }
   }
 
   // Used to drag the graph round the screen
