@@ -2,7 +2,11 @@
     "env": {
         "commonjs": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "browser": true
+    },
+    "globals": {
+        "d3": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
