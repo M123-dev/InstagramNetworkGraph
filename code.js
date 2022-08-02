@@ -8,6 +8,7 @@
 
   let graph;
   let hover = false;
+  let dragging = false;
 
   if (mock_version) {
     console.log("Generating mock data");
@@ -53,25 +54,25 @@
       "Z",
     ];
 
-    for (let i = 0; i < alphabet.length; i++) {
-      obj.nodes.push({
-        id: alphabet[i],
-        size: Math.floor(Math.random() * 100) + 1,
-      });
-    }
-
     obj.nodes.push({
       id: "Root",
-      size: 100,
+      size: alphabet.length,
     });
 
     for (let i = 0; i < alphabet.length; i++) {
       let random = Math.floor(Math.random() * (alphabet.length - 1)) / 3;
+
+      obj.nodes.push({
+        id: alphabet[i],
+        size: (random + 1) * 3,
+      });
+
       obj.links.push({
         target: alphabet[i],
         source: "Root",
         length: Math.floor(Math.random() * 10) + 600,
       });
+
       for (let j = 0; j < random; j++) {
         obj.links.push({
           source: alphabet[i],
@@ -124,7 +125,7 @@
         .strength(link_strength)
     );
 
-  console.log(root_username);
+  console.log(`Root user is: ${root_username}`);
 
   if (graph === undefined) {
     console.log("Loading json...");
@@ -133,6 +134,8 @@
 
     console.log("Loaded data.json");
   }
+
+  console.log(`Loaded ${graph.nodes.length} nodes and ${graph.links.length} links`)
 
   var link = g
     .selectAll("line")
@@ -175,24 +178,29 @@
     })
     .attr("fill", "#fff")
     .style("stroke-width", function (d) {
-      console.log(max_size);
       return d.size / (max_size / 8) + 2;
     })
     .style("stroke", function (d) {
       return "#1f77b4";
     })
     .on("mouseenter", (evt, d) => {
+
+      if(dragging){
+        return;
+      }
+
+      console.log("Mouseenter")
       hover = true;
-      let list = [];
+      let map = new Map();
       link
         //.attr("display", "none")
         .style("opacity", "0.2")
         .filter((l) => {
           if (l.source.index === d) {
-            list.push(l.target.id);
+            map.set(l.target.id, null);
             return true;
           } else if (l.target.index === d) {
-            list.push(l.source.id);
+            map.set(l.source.id, null);
             return true;
           }
           return false;
@@ -202,15 +210,14 @@
       node
         .style("opacity", "0.4")
         .filter((n) => {
-          return n.index === d || list.includes(n.id);
+          return n.index === d || map.has(n.id);
         })
         .style("opacity", "1");
 
       if (colorful) {
         circle
           .filter((n) => {
-            console.log(n);
-            return n.index !== d && !list.includes(n.id);
+            return n.index !== d && !map.has(n.id);
           })
           .style("stroke", function (d) {
             return "#a8bfe3";
@@ -218,6 +225,9 @@
       }
     })
     .on("mouseleave", (evt) => {
+      if(dragging){
+        return;
+      }
       hover = false;
       if (colorful) {
         circle.style("stroke", function (d) {
@@ -299,6 +309,7 @@
 
   // Used to drag the graph round the screen
   function dragstarted(d) {
+    dragging = true;
     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
@@ -310,6 +321,7 @@
   }
 
   function dragended(d) {
+    dragging = false;
     if (!d3.event.active) simulation.alphaTarget(0);
     d.fx = null;
     d.fy = null;
