@@ -297,7 +297,7 @@
 		}
 	}
 
-	// Used to drag the graph round the screen
+	// Used to drag nodes round the screen
 	function dragstarted(d) {
 		dragging = true;
 		if (!d3.event.active) simulation.alphaTarget(0.3).restart();
