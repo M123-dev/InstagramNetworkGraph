@@ -277,18 +277,6 @@
 			return "translate(" + d.x + "," + d.y + ")";
 		});
 
-		/* Creating a color circle around the root user
-    circle.style("stroke", function (d) {
-      if(d.x > root_dx && d.y > root_dy){
-        return color(- (d.x / 2000) + (d.y / 2000) );
-      } else if(d.x < root_dx && d.y > root_dy){
-        return color( (-(d.x / 2000) - (d.y / 2000))/2 );
-      } else if(d.x < root_dx && d.y < root_dy){
-        return color((- (d.x / 2000) + (d.y / 2000))/3 );
-      } else if(d.x > root_dx && d.y < root_dy){
-        return color(((d.x / 2000) + (d.y / 2000) )/4);
-      }
-    */
 		if (colorful && !hover) {
 			circle.style("stroke", function (d) {
 				var value = d.x / 2000 - d.y / 2000;
