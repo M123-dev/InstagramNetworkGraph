@@ -4,7 +4,7 @@ An all in one Instagram scraper and analyzer for finding and visualizing cluster
 
 ## Example
 
-* [Interactive example with mock data](https://m123-dev.github.io/instagramNetworkGraph/graph.html?mock_version=true)
+* [Interactive example with mock data](https://m123-dev.github.io/InstagramNetworkGraph/graph.html?mock_version=true)
 
 ![Example cluster](/assets/Cluster_dark.png?raw=true "Optional Title")
 
