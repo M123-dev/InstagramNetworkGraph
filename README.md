@@ -45,6 +45,7 @@ After that you will be presented a GUI on [localhost:3000/](http://localhost:300
 * Node Drag + Drop
 * Zoom + Drag
 * <span style="color:#FF0000">C</span><span style="color:#FFBF00">o</span><span style="color:#80FF00">l</span><span style="color:#00FF40">o</span><span style="color:#00FFFF">r</span><span style="color:#0040FF">f</span><span style="color:#7F00FF">u</span><span style="color:#FF00BF">l</span> nodes. (Needs more performance)
+* 2FA support
 
 ## Stack
 
