@@ -1,5 +1,5 @@
 {
-  "name": "instagramnetworkgraph",
+  "name": "InstagramNetworkGraph",
   "version": "1.0.0",
   "description": "An all in one Instagram scraper and analyzer for finding and visualizing clusters from people you are following. ",
   "main": "lib/graph-host.js",

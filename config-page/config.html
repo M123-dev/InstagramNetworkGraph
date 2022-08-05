@@ -43,6 +43,18 @@
             </div>
 
             <div class="col-md-6 mb-3">
+              <div class="form-group form-inline">
+                Scrape people
+                <select class="form-control input-lg" name="you_follow">
+                  <option value="you_following">you are following</option>
+                  <option value="following_you">that are following you</option>
+                </select>
+              </div>
+            </div>
+
+            
+
+            <div class="col-md-6 mb-3">
               <label for="requests_per_hour">Requests per hour</label>
               <input name="requests_per_hour" type="number" class="form-control" id="requests_per_hour" value="200" required>
               <p> 200 is a save guess as it's the limit for the official analytics api
@@ -133,7 +145,7 @@
 
             <div class="col-md-8 order-md-1">
 
-            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/scrape_root_user';">1. Scrape root user (yourself)</button>
+            <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/scrape_root_user';">1. Scrape root user (username to scrape)</button>
 
             <button class="btn btn-primary btn-lg btn-block m-1" type="submit" onclick="javascript: form.action='/scrape_all_users';">2. Scrape all your connections</button>
 
